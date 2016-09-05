@@ -11,7 +11,6 @@ def adaline(input_samples, labels,weight_samples):
     control = True
     time = 0
     while control:
-        
         time = time + 1
         control = False
         for input_sample, label in zip(input_samples, labels):
@@ -27,21 +26,6 @@ def adaline(input_samples, labels,weight_samples):
     
     test_adaline(weight_samples)
 
-
-    
-def test_adaline(weight_samples):
-    input_samples = load_entries_simbol_problem('test.txt')
-    
-    print("TESTANDO ADALINE")
-    #print(input_samples, weight_samples)    
-    
-    for input_sample in input_samples:
-        result = activation_function(input_sample, weight_samples)
-        print("Entrada:"+ str(input_sample))
-        formated_image(input_sample)
-        print("Classe: "+ str(result))
-    
-    return 0
 
 def formated_image(input_sample):
     cont = 0    
@@ -111,6 +95,20 @@ def load_simbol_problem():
     
     return input_samples, labels, weight_samples
 
+def test_adaline(weight_samples):
+    input_samples = load_entries_simbol_problem('test.txt')
+    
+    print("TESTANDO ADALINE")
+    #print(input_samples, weight_samples)    
+    
+    for input_sample in input_samples:
+        result = activation_function(input_sample, weight_samples)
+        print("Entrada:"+ str(input_sample))
+        formated_image(input_sample)
+        print("Classe: "+ str(result))
+    
+    return 0
+    
 def load_samples():
     #input_samples, labels, weight_samples = load_and_problem()
     input_samples, labels, weight_samples = load_simbol_problem()
@@ -128,10 +126,10 @@ def update_weights(label, result, input_sample, weight_samples):
     return weight_samples
 
 def linear_activation_function(value):
-    if(value > 0):
+    if(value >= 0):
         return 1
     else:
-        return 0
+        return -1
         
 if __name__ == "__main__":
     load_samples()
